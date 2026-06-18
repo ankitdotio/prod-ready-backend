@@ -1,9 +1,11 @@
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default tseslint.config(
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
+  eslintConfigPrettier,
 
   {
     files: ["src/**/*.ts"],
@@ -16,7 +18,12 @@ export default tseslint.config(
     },
 
     rules: {
-      "no-console": "error",
+      "no-console": [
+  "warn",
+  {
+    allow: ["warn", "error"],
+  },
+],
       quotes: ["error", "single", {
         allowTemplateLiterals: true,
       }],
