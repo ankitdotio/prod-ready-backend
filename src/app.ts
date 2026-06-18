@@ -1,0 +1,1 @@
+console.log('this should be an error detected by ts eslint')
