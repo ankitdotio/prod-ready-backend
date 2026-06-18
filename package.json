@@ -13,8 +13,8 @@
     "lint:fix":"eslint src --fix"
   },
   "keywords": [],
-  "lint-stage":{
-    "*.ts":["pnpm lint:fix"]},
+  "lint-staged":{
+    "*.{ts,tsx}":["pnpm lint:fix"]},
   "author": "",
   "license": "ISC",
   "devEngines": {
