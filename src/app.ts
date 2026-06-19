@@ -7,6 +7,8 @@ import globalErrorHandler from './middleware/globalErrorHandler.js'
 import applicationResponseMessage from './constants/applicationResponseMessage.js'
 import httpError from './util/httpError.js'
 import helmet from 'helmet'
+import cors from 'cors'
+import config from './config/config.js'
 
 export const app: Application = express()
 const __filename = fileURLToPath(import.meta.url)
@@ -15,6 +17,13 @@ const __dirname = path.dirname(__filename)
 // Middleware
 // -----------------------------------------------------------------------------
 app.use(helmet())
+app.use(
+  cors({
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
+    origin: [`${config.CLIENT_ORIGIN}`],
+    credentials: true,
+  }),
+)
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '../', 'public')))
 
