@@ -2,6 +2,7 @@ import type { Request, Response } from 'express'
 import type { thttpResponse } from '../types/types.js'
 import config from '../config/config.js'
 import { EApplicationEnvironment } from '../constants/application.js'
+import logger from './logger.js'
 
 export default (
   req: Request,
@@ -22,7 +23,7 @@ export default (
     data: data,
   }
   //log
-  console.info('CONTROLLER RESPONSE', {
+  logger.info('CONTROLLER RESPONSE', {
     meta: response,
   })
   //prod env check

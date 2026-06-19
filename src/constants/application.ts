@@ -1,4 +1,4 @@
 export enum EApplicationEnvironment {
   PRODUCTION = 'production',
-  ENVIRONMENT = 'environment',
+  DEVELOPMENT = 'development',
 }

@@ -3,6 +3,7 @@ import type { thttpError } from '../types/types.js'
 import { EApplicationEnvironment } from '../constants/application.js'
 import config from '../config/config.js'
 import applicationResponseMessage from '../constants/applicationResponseMessage.js'
+import logger from './logger.js'
 
 // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
 export default (req: Request, err: Error | unknown, errorStatusCode: number = 500) => {
@@ -21,7 +22,7 @@ export default (req: Request, err: Error | unknown, errorStatusCode: number = 50
         : applicationResponseMessage.SOMETHING_WENT_WRONG,
     data: null,
   }
-  console.log(`ERROR_CONTROLLER`, { meta: errorObj })
+  logger.error(`ERROR_CONTROLLER`, { meta: errorObj })
 
   if (config.ENV === EApplicationEnvironment.PRODUCTION) {
     delete errorObj.request.ip

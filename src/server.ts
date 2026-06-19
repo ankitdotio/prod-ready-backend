@@ -1,29 +1,30 @@
 import config from './config/config.js'
 import { app } from './app.js'
+import logger from './util/logger.js'
 
 const PORT = config.PORT ?? 3000
 
 const server = app.listen(PORT, () => {
-  console.log(`SERVER IS UP AND RUNNING ON PORT ${PORT}`)
+  //logger.log(`SERVER IS UP AND RUNNING ON PORT ${PORT}`)
 })
 ;(() => {
   //DB CONNECTION
   try {
-    console.log(`APPLICATION STARTED`, {
+    logger.info(`APPLICATION STARTED`, {
       meta: {
         PORT: PORT,
         SERVER_URI: config.SERVER_URI,
       },
     })
   } catch (error) {
-    console.error(`ERROR WHILE STARTING THE APPLICATION`, {
+    logger.error(`ERROR WHILE STARTING THE APPLICATION`, {
       meta: {
         error: error,
       },
     })
     server.close((error) => {
       if (error) {
-        console.error(`ERROR WHILE CLOSING THE SERVER`, {
+        logger.error(`ERROR WHILE CLOSING THE SERVER`, {
           meta: {
             error,
           },
