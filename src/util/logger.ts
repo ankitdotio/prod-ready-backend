@@ -10,8 +10,23 @@ import * as sourceMapSupport from 'source-map-support'
 
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { bgYellow, blue, green, magenta, red, yellow } from 'colorette'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
+
+const colorizeLevel = (level: string) => {
+  switch (level) {
+    case 'ERROR':
+      return red(level)
+
+    case 'INFO':
+      return blue(level)
+    case 'WARN':
+      return yellow(level)
+    default:
+      return bgYellow(level)
+  }
+}
 
 //
 //LINKING TRACE SUPPORT
@@ -20,16 +35,17 @@ sourceMapSupport.install()
 
 const consoleLogFormat = format.printf((info) => {
   const { level, message, timestamp, meta = {} } = info
-  const customLevel = level.toUpperCase()
+  const customLevel = colorizeLevel(level.toUpperCase())
 
-  const customTimeStamp = timestamp
+  const customTimeStamp = green(timestamp)
   const customMessage = message
   const customMeta = util.inspect(meta, {
     showHidden: false,
     depth: null,
+    colors: true,
   })
   // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-  const customLog = `${customLevel} [${customTimeStamp}] ${customMessage}\n${'META '}${customMeta}\n`
+  const customLog = `${customLevel} [${customTimeStamp}] ${customMessage}\n${magenta('META ')}${customMeta}\n`
   return customLog
 })
 
