@@ -1,6 +1,6 @@
 import type { NextFunction, Request } from 'express'
 
-import errorObject from './errorObject.js'
+import { errorObject } from './errorObject.js'
 
 export default (
   nextfunc: NextFunction,

@@ -9,6 +9,7 @@ import httpError from './util/httpError.js'
 import helmet from 'helmet'
 import cors from 'cors'
 import config from './config/config.js'
+import { rateLimiter } from './middleware/ratelimiter.js'
 
 export const app: Application = express()
 const __filename = fileURLToPath(import.meta.url)
@@ -18,7 +19,7 @@ const __dirname = path.dirname(__filename)
 // Middleware
 // -----------------------------------------------------------------------------
 app.disable('x-powered-by')
-
+app.use(rateLimiter)
 app.use(helmet())
 app.use(
   cors({

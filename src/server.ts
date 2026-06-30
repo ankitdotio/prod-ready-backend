@@ -1,10 +1,11 @@
 import config from './config/config.js'
 import { app } from './app.js'
 import logger from './util/logger.js'
+import { gracefulShutdown } from './util/gracefullShutDown.js'
 
 const PORT = config.PORT ?? 3000
 
-const server = app.listen(PORT, () => {
+export const server = app.listen(PORT, () => {
   //logger.log(`SERVER IS UP AND RUNNING ON PORT ${PORT}`)
 })
 ;(() => {
@@ -35,3 +36,11 @@ const server = app.listen(PORT, () => {
     })
   }
 })()
+
+process.on('SIGINT', () => {
+  void gracefulShutdown('SIGINT')
+})
+
+process.on('SIGTERM', () => {
+  void gracefulShutdown('SIGTERM')
+})

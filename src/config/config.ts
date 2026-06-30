@@ -1,10 +1,8 @@
-import dotenvFlow from 'dotenv-flow'
-
-dotenvFlow.config()
+import { env } from '../validation/env.js'
 
 export default {
-  ENV: process.env.ENV,
-  PORT: process.env.PORT,
-  SERVER_URI: process.env.SERVER_URI,
-  CLIENT_ORIGIN: process.env.CLIENT_ORIGIN,
+  ENV: env.NODE_ENV,
+  PORT: env.PORT,
+  SERVER_URI: env.SERVER_URI,
+  CLIENT_ORIGIN: env.CLIENT_ORIGIN,
 }

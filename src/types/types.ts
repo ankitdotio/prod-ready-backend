@@ -1,5 +1,5 @@
-export type thttpResponse = {
-  success: boolean
+export type THttpResponse<T = unknown> = {
+  success: true
   statusCode: number
   request: {
     ip?: string | null
@@ -7,12 +7,12 @@ export type thttpResponse = {
     method: string
   }
   message: string
-  data: unknown
+  data: T | null
   trace?: object | null
 }
 
-export type thttpError = {
-  success: boolean
+export type THttpError<T = unknown> = {
+  success: false
   statusCode: number
   request: {
     ip?: string | null
@@ -20,6 +20,6 @@ export type thttpError = {
     method: string
   }
   message: string
+  data: T | null
   trace?: object | null
-  data: unknown
 }

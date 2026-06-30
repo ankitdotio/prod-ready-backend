@@ -34,10 +34,10 @@ const colorizeLevel = (level: string) => {
 sourceMapSupport.install()
 
 const consoleLogFormat = format.printf((info) => {
-  const { level, message, timestamp, meta = {} } = info
+  const { level, message, timestamps, meta = {} } = info
   const customLevel = colorizeLevel(level.toUpperCase())
 
-  const customTimeStamp = green(timestamp)
+  const customTimeStamp = green(timestamps)
   const customMessage = message
   const customMeta = util.inspect(meta, {
     showHidden: false,
